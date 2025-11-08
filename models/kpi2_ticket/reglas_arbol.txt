@@ -1,0 +1,37 @@
+|--- modalidad_local <= 0.50
+|   |--- num_clientes <= 9.50
+|   |   |--- num_clientes <= 8.50
+|   |   |   |--- dia_semana_Tue <= 0.50
+|   |   |   |   |--- num_clientes <= 2.50
+|   |   |   |   |   |--- value: [12.75]
+|   |   |   |   |--- num_clientes >  2.50
+|   |   |   |   |   |--- value: [12.48]
+|   |   |   |--- dia_semana_Tue >  0.50
+|   |   |   |   |--- value: [12.24]
+|   |   |--- num_clientes >  8.50
+|   |   |   |--- dia_semana_Fri <= 0.50
+|   |   |   |   |--- value: [12.72]
+|   |   |   |--- dia_semana_Fri >  0.50
+|   |   |   |   |--- value: [12.75]
+|   |--- num_clientes >  9.50
+|   |   |--- value: [12.19]
+|--- modalidad_local >  0.50
+|   |--- num_clientes <= 7.50
+|   |   |--- value: [12.73]
+|   |--- num_clientes >  7.50
+|   |   |--- num_clientes <= 10.50
+|   |   |   |--- num_clientes <= 9.50
+|   |   |   |   |--- num_clientes <= 8.50
+|   |   |   |   |   |--- value: [13.54]
+|   |   |   |   |--- num_clientes >  8.50
+|   |   |   |   |   |--- value: [13.41]
+|   |   |   |--- num_clientes >  9.50
+|   |   |   |   |--- value: [13.12]
+|   |   |--- num_clientes >  10.50
+|   |   |   |--- dia_semana_Fri <= 0.50
+|   |   |   |   |--- num_clientes <= 17.50
+|   |   |   |   |   |--- value: [13.62]
+|   |   |   |   |--- num_clientes >  17.50
+|   |   |   |   |   |--- value: [13.16]
+|   |   |   |--- dia_semana_Fri >  0.50
+|   |   |   |   |--- value: [13.24]

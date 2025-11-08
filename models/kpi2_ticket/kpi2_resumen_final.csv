@@ -1,0 +1,227 @@
+fecha,modalidad,dia_semana,num_clientes,ticket_promedio,ticket_predicho,residual,clase_ticket,recomendacion
+2023-01-01,local,Sun,15,13.97,13.624285714285712,0.34571428571428875,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-01,pension,Sun,5,12.8,12.478269230769232,0.3217307692307685,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-02,local,Mon,10,12.62,13.11923076923077,-0.4992307692307705,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-02,pension,Mon,7,12.86,12.478269230769232,0.3817307692307672,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-03,local,Tue,15,13.99,13.624285714285712,0.3657142857142883,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-03,pension,Tue,3,12.33,12.244444444444445,0.08555555555555472,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-04,local,Wed,10,12.4,13.11923076923077,-0.7192307692307693,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-04,pension,Wed,4,13.25,12.478269230769232,0.7717307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-05,local,Thu,8,12.38,13.544,-1.1639999999999997,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-05,pension,Thu,8,11.5,12.478269230769232,-0.9782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-06,local,Fri,17,13.48,13.243636363636364,0.23636363636363633,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-06,pension,Fri,7,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-07,local,Sat,16,14.11,13.624285714285712,0.48571428571428754,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-07,pension,Sat,9,12.33,12.715555555555556,-0.38555555555555543,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-08,local,Sun,10,14.13,13.11923076923077,1.010769230769231,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-08,pension,Sun,4,12.75,12.478269230769232,0.2717307692307678,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-09,local,Mon,14,12.25,13.624285714285712,-1.374285714285712,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-09,pension,Mon,2,13.5,12.75,0.75,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-10,local,Tue,7,13.62,12.726666666666667,0.8933333333333326,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-10,pension,Tue,8,12.63,12.244444444444445,0.38555555555555543,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-11,local,Wed,11,13.72,13.624285714285712,0.09571428571428875,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-11,pension,Wed,5,13.4,12.478269230769232,0.9217307692307681,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-12,local,Thu,11,13.92,13.624285714285712,0.29571428571428804,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-12,pension,Thu,9,13.0,12.715555555555556,0.2844444444444445,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-13,local,Fri,14,13.91,13.243636363636364,0.666363636363636,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-13,pension,Fri,10,12.8,12.191111111111113,0.6088888888888881,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-14,local,Sat,17,13.98,13.624285714285712,0.35571428571428854,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-14,pension,Sat,8,12.0,12.478269230769232,-0.4782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-15,local,Sun,14,12.64,13.624285714285712,-0.9842857142857113,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-15,pension,Sun,8,12.38,12.478269230769232,-0.09826923076923144,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-16,local,Mon,9,13.73,13.407499999999999,0.32250000000000156,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-16,pension,Mon,6,12.0,12.478269230769232,-0.4782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-17,local,Tue,13,12.51,13.624285714285712,-1.114285714285712,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-17,pension,Tue,8,11.88,12.244444444444445,-0.36444444444444457,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-18,local,Wed,13,14.76,13.624285714285712,1.135714285714288,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-18,pension,Wed,6,12.0,12.478269230769232,-0.4782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-19,local,Thu,2,11.0,12.726666666666667,-1.7266666666666666,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-19,pension,Thu,4,12.5,12.478269230769232,0.021730769230767777,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-20,local,Fri,18,13.05,13.243636363636364,-0.19363636363636338,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-20,pension,Fri,4,12.0,12.478269230769232,-0.4782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-21,local,Sat,12,14.53,13.624285714285712,0.9057142857142875,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-21,pension,Sat,6,12.17,12.478269230769232,-0.3082692307692323,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-22,local,Sun,11,13.78,13.624285714285712,0.15571428571428747,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-22,pension,Sun,8,12.25,12.478269230769232,-0.22826923076923222,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-23,local,Mon,12,14.09,13.624285714285712,0.46571428571428797,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-23,pension,Mon,4,13.5,12.478269230769232,1.0217307692307678,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-24,local,Tue,12,13.62,13.624285714285712,-0.004285714285712672,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-24,pension,Tue,14,11.93,12.191111111111113,-0.26111111111111285,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-25,local,Wed,11,12.66,13.624285714285712,-0.9642857142857117,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-25,pension,Wed,2,13.0,12.75,0.25,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-26,local,Thu,17,13.38,13.624285714285712,-0.2442857142857111,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-26,pension,Thu,8,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-27,local,Fri,16,12.49,13.243636363636364,-0.7536363636363639,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-27,pension,Fri,3,12.33,12.478269230769232,-0.14826923076923215,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-28,local,Sat,17,13.7,13.624285714285712,0.0757142857142874,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-28,pension,Sat,10,11.5,12.191111111111113,-0.6911111111111126,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-01-29,local,Sun,11,14.24,13.624285714285712,0.6157142857142883,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-29,pension,Sun,9,13.11,12.715555555555556,0.39444444444444393,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-30,local,Mon,11,12.84,13.624285714285712,-0.784285714285712,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-01-30,pension,Mon,11,12.55,12.191111111111113,0.35888888888888815,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-01-31,local,Tue,13,13.52,13.624285714285712,-0.10428571428571232,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-01-31,pension,Tue,9,12.22,12.715555555555556,-0.49555555555555486,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-01,local,Wed,3,11.33,12.726666666666667,-1.3966666666666665,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-01,pension,Wed,4,11.75,12.478269230769232,-0.7282692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-02,local,Thu,14,12.57,13.624285714285712,-1.0542857142857116,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-02-02,pension,Thu,6,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-03,local,Fri,15,13.23,13.243636363636364,-0.013636363636363669,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-03,pension,Fri,9,13.33,12.754,0.5760000000000005,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-04,local,Sat,19,14.25,13.162,1.0879999999999992,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-04,pension,Sat,9,13.0,12.715555555555556,0.2844444444444445,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-05,local,Sun,17,13.57,13.624285714285712,-0.054285714285711606,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-05,pension,Sun,7,13.57,12.478269230769232,1.091730769230768,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-06,local,Mon,10,13.23,13.11923076923077,0.11076923076923073,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-06,pension,Mon,9,12.78,12.715555555555556,0.06444444444444386,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-07,local,Tue,16,14.74,13.624285714285712,1.1157142857142883,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-07,pension,Tue,8,12.88,12.244444444444445,0.6355555555555554,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-08,local,Wed,10,12.96,13.11923076923077,-0.15923076923076884,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-08,pension,Wed,5,12.6,12.478269230769232,0.12173076923076742,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-09,local,Thu,10,13.34,13.11923076923077,0.22076923076923016,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-09,pension,Thu,5,13.4,12.478269230769232,0.9217307692307681,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-10,local,Fri,12,13.43,13.243636363636364,0.18636363636363562,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-10,pension,Fri,9,12.22,12.754,-0.5339999999999989,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-11,local,Sat,18,13.2,13.162,0.03799999999999848,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-11,pension,Sat,2,12.5,12.75,-0.25,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-12,local,Sun,19,13.84,13.162,0.677999999999999,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-12,pension,Sun,11,12.45,12.191111111111113,0.2588888888888867,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-13,local,Mon,11,13.17,13.624285714285712,-0.45428571428571196,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-13,pension,Mon,7,12.14,12.478269230769232,-0.33826923076923165,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-14,local,Tue,10,12.93,13.11923076923077,-0.18923076923076998,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-02-14,pension,Tue,6,13.0,12.244444444444445,0.7555555555555546,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-15,local,Wed,10,14.04,13.11923076923077,0.9207692307692295,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-15,pension,Wed,2,13.5,12.75,0.75,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-16,local,Thu,17,14.01,13.624285714285712,0.3857142857142879,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-16,pension,Thu,3,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-17,local,Fri,13,14.67,13.243636363636364,1.4263636363636358,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-17,pension,Fri,9,13.11,12.754,0.35599999999999987,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-18,local,Sat,15,13.3,13.624285714285712,-0.3242857142857112,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-18,pension,Sat,5,13.2,12.478269230769232,0.7217307692307671,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-19,local,Sun,11,14.73,13.624285714285712,1.1057142857142885,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-19,pension,Sun,5,13.4,12.478269230769232,0.9217307692307681,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-20,local,Mon,11,14.04,13.624285714285712,0.41571428571428726,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-20,pension,Mon,4,12.25,12.478269230769232,-0.22826923076923222,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-21,local,Tue,7,13.59,12.726666666666667,0.8633333333333333,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-21,pension,Tue,8,12.25,12.244444444444445,0.005555555555554648,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-22,local,Wed,11,12.18,13.624285714285712,-1.4442857142857122,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-02-22,pension,Wed,5,12.2,12.478269230769232,-0.27826923076923293,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-23,local,Thu,14,13.7,13.624285714285712,0.0757142857142874,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-23,pension,Thu,10,12.4,12.191111111111113,0.2088888888888878,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-24,local,Fri,9,12.32,13.407499999999999,-1.0874999999999986,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-24,pension,Fri,9,11.89,12.754,-0.863999999999999,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-25,local,Sat,13,12.73,13.624285714285712,-0.8942857142857115,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-02-25,pension,Sat,8,12.38,12.478269230769232,-0.09826923076923144,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-02-26,local,Sun,7,13.63,12.726666666666667,0.9033333333333342,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-02-26,pension,Sun,7,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-27,local,Mon,15,13.44,13.624285714285712,-0.1842857142857124,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-27,pension,Mon,1,13.0,12.75,0.25,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-28,local,Tue,16,12.97,13.624285714285712,-0.6542857142857113,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-02-28,pension,Tue,7,12.86,12.244444444444445,0.6155555555555541,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-01,local,Wed,5,13.49,12.726666666666667,0.7633333333333336,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-01,pension,Wed,7,11.57,12.478269230769232,-0.9082692307692319,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-02,local,Thu,11,11.73,13.624285714285712,-1.8942857142857115,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-02,pension,Thu,6,12.5,12.478269230769232,0.021730769230767777,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-03,local,Fri,14,12.85,13.243636363636364,-0.39363636363636445,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-03,pension,Fri,5,12.8,12.478269230769232,0.3217307692307685,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-04,local,Sat,20,13.95,13.162,0.7879999999999985,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-04,pension,Sat,11,12.09,12.191111111111113,-0.1011111111111127,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-05,local,Sun,19,12.67,13.162,-0.4920000000000009,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-05,pension,Sun,11,12.55,12.191111111111113,0.35888888888888815,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-06,local,Mon,12,12.69,13.624285714285712,-0.9342857142857124,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-06,pension,Mon,9,12.56,12.715555555555556,-0.155555555555555,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-07,local,Tue,9,13.51,13.407499999999999,0.10250000000000092,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-07,pension,Tue,2,12.0,12.244444444444445,-0.24444444444444535,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-08,local,Wed,9,13.65,13.407499999999999,0.2425000000000015,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-08,pension,Wed,7,11.86,12.478269230769232,-0.6182692307692328,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-09,local,Thu,9,14.3,13.407499999999999,0.8925000000000018,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-09,pension,Thu,3,11.67,12.478269230769232,-0.8082692307692323,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-10,local,Fri,14,13.14,13.243636363636364,-0.10363636363636353,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-10,pension,Fri,5,12.4,12.478269230769232,-0.07826923076923187,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-11,local,Sat,17,13.05,13.624285714285712,-0.5742857142857112,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-11,pension,Sat,8,12.63,12.478269230769232,0.15173076923076856,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-12,local,Sun,10,12.43,13.11923076923077,-0.68923076923077,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-12,pension,Sun,9,13.44,12.715555555555556,0.724444444444444,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-13,local,Mon,7,12.41,12.726666666666667,-0.31666666666666643,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-13,pension,Mon,5,12.2,12.478269230769232,-0.27826923076923293,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-14,local,Tue,10,13.18,13.11923076923077,0.06076923076923002,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-14,pension,Tue,5,12.4,12.244444444444445,0.155555555555555,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-15,local,Wed,13,15.36,13.624285714285712,1.7357142857142875,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-15,pension,Wed,7,12.43,12.478269230769232,-0.04826923076923251,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-16,local,Thu,7,12.86,12.726666666666667,0.13333333333333286,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-16,pension,Thu,6,12.5,12.478269230769232,0.021730769230767777,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-17,local,Fri,12,12.6,13.243636363636364,-0.6436363636363645,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-17,pension,Fri,9,13.22,12.754,0.4660000000000011,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-18,local,Sat,12,12.54,13.624285714285712,-1.0842857142857127,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-18,pension,Sat,6,12.67,12.478269230769232,0.1917307692307677,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-19,local,Sun,20,12.34,13.162,-0.822000000000001,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-19,pension,Sun,8,12.25,12.478269230769232,-0.22826923076923222,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-20,local,Mon,12,14.07,13.624285714285712,0.4457142857142884,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-20,pension,Mon,6,12.67,12.478269230769232,0.1917307692307677,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-21,local,Tue,9,13.3,13.407499999999999,-0.10749999999999815,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-21,pension,Tue,9,13.11,12.715555555555556,0.39444444444444393,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-22,local,Wed,13,13.03,13.624285714285712,-0.5942857142857125,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-22,pension,Wed,7,12.14,12.478269230769232,-0.33826923076923165,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-23,local,Thu,10,13.05,13.11923076923077,-0.06923076923076898,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-23,pension,Thu,7,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-24,local,Fri,12,12.83,13.243636363636364,-0.413636363636364,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-24,pension,Fri,6,12.5,12.478269230769232,0.021730769230767777,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-25,local,Sat,18,13.01,13.162,-0.15200000000000102,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-25,pension,Sat,6,11.67,12.478269230769232,-0.8082692307692323,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-26,local,Sun,13,14.03,13.624285714285712,0.40571428571428747,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-26,pension,Sun,12,11.75,12.191111111111113,-0.44111111111111256,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-27,local,Mon,8,13.57,13.544,0.0259999999999998,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-27,pension,Mon,8,12.13,12.478269230769232,-0.34826923076923144,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-28,local,Tue,8,13.63,13.544,0.0860000000000003,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-28,pension,Tue,2,12.0,12.244444444444445,-0.24444444444444535,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-29,local,Wed,11,12.68,13.624285714285712,-0.9442857142857122,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-03-29,pension,Wed,7,12.57,12.478269230769232,0.09173076923076806,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-03-30,local,Thu,12,13.7,13.624285714285712,0.0757142857142874,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-30,pension,Thu,4,11.75,12.478269230769232,-0.7282692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-03-31,local,Fri,14,14.0,13.243636363636364,0.7563636363636359,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-03-31,pension,Fri,7,12.86,12.478269230769232,0.3817307692307672,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-01,local,Sat,16,13.53,13.624285714285712,-0.09428571428571253,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-01,pension,Sat,6,12.5,12.478269230769232,0.021730769230767777,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-02,local,Sun,13,13.41,13.624285714285712,-0.21428571428571175,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-02,pension,Sun,4,12.75,12.478269230769232,0.2717307692307678,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-03,local,Mon,8,13.41,13.544,-0.13400000000000034,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-03,pension,Mon,7,12.43,12.478269230769232,-0.04826923076923251,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-04,local,Tue,8,15.11,13.544,1.565999999999999,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-04,pension,Tue,7,11.71,12.244444444444445,-0.5344444444444445,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-05,local,Wed,12,13.51,13.624285714285712,-0.1142857142857121,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-05,pension,Wed,3,11.67,12.478269230769232,-0.8082692307692323,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-06,local,Thu,12,13.34,13.624285714285712,-0.28428571428571203,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-06,pension,Thu,7,12.29,12.478269230769232,-0.18826923076923308,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-07,local,Fri,9,13.64,13.407499999999999,0.2325000000000017,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-07,pension,Fri,8,13.75,12.478269230769232,1.2717307692307678,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-08,local,Sat,15,13.45,13.624285714285712,-0.1742857142857126,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-08,pension,Sat,8,13.75,12.478269230769232,1.2717307692307678,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-09,local,Sun,16,13.11,13.624285714285712,-0.5142857142857125,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-09,pension,Sun,5,12.0,12.478269230769232,-0.4782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-10,local,Mon,11,13.85,13.624285714285712,0.22571428571428775,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-10,pension,Mon,6,12.0,12.478269230769232,-0.4782692307692322,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-11,local,Tue,10,12.51,13.11923076923077,-0.6092307692307699,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-04-11,pension,Tue,5,11.6,12.244444444444445,-0.6444444444444457,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-12,local,Wed,8,12.75,13.544,-0.7940000000000005,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-12,pension,Wed,10,12.5,12.191111111111113,0.30888888888888744,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-13,local,Thu,11,13.12,13.624285714285712,-0.5042857142857127,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-13,pension,Thu,6,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-14,local,Fri,10,14.19,13.11923076923077,1.0707692307692298,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-14,pension,Fri,15,12.33,12.191111111111113,0.1388888888888875,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-15,local,Sat,17,13.63,13.624285714285712,0.005714285714288891,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-15,pension,Sat,6,13.0,12.478269230769232,0.5217307692307678,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-16,local,Sun,17,14.12,13.624285714285712,0.49571428571428733,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-16,pension,Sun,6,13.17,12.478269230769232,0.6917307692307677,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-17,local,Mon,8,13.91,13.544,0.36599999999999966,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-17,pension,Mon,4,13.75,12.478269230769232,1.2717307692307678,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-18,local,Tue,10,12.68,13.11923076923077,-0.43923076923077,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-04-18,pension,Tue,4,11.75,12.244444444444445,-0.49444444444444535,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-19,local,Wed,9,13.38,13.407499999999999,-0.02749999999999808,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-19,pension,Wed,9,12.33,12.715555555555556,-0.38555555555555543,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-20,local,Thu,7,13.99,12.726666666666667,1.2633333333333336,alto,Mantener propuesta de valor actual; documentar qué funcionó.
+2023-04-20,pension,Thu,7,11.43,12.478269230769232,-1.0482692307692325,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
+2023-04-21,local,Fri,10,12.55,13.11923076923077,-0.569230769230769,bajo,Local: alta afluencia con ticket bajo → lanzar combo/upsell en mostrador.
+2023-04-21,pension,Fri,10,12.8,12.191111111111113,0.6088888888888881,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-22,local,Sat,9,13.16,13.407499999999999,-0.24749999999999872,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-22,pension,Sat,7,13.14,12.478269230769232,0.6617307692307683,medio,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-23,local,Sun,5,12.82,12.726666666666667,0.09333333333333371,bajo,Monitoreo sin cambios; evaluar micro-promos según afluencia.
+2023-04-23,pension,Sun,1,11.0,12.75,-1.75,bajo,Pensión: ticket por debajo de lo esperado → revisar menú del día/porciones.
