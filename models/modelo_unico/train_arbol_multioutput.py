@@ -17,7 +17,7 @@ DATA_PATH = os.path.join(THIS_DIR, "dataset_unificado.csv")
 OUT_DIR = THIS_DIR
 
 if not os.path.exists(DATA_PATH):
-    raise SystemExit("❌ No existe dataset_unificado.csv. Ejecuta build_dataset_unificado.py")
+    raise SystemExit("No existe dataset_unificado.csv. Ejecuta build_dataset_unificado.py")
 
 df = pd.read_csv(DATA_PATH)
 print("Filas del dataset:", len(df))
@@ -77,14 +77,14 @@ for c in num_cols:
     if c in df.columns:
         df[c] = pd.to_numeric(df[c], errors="coerce")
     else:
-        raise SystemExit(f"❌ Falta la columna numérica requerida: {c}")
+        raise SystemExit(f"Falta la columna numérica requerida: {c}")
 
 # Columnas categóricas a one-hot
 cat_cols = ["modalidad", "tipo_cliente", "categoria_plato", "extra"]
 
 for c in cat_cols:
     if c not in df.columns:
-        raise SystemExit(f"❌ Falta la columna categórica requerida: {c}")
+        raise SystemExit(f"Falta la columna categórica requerida: {c}")
 
 encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
 X_cat = encoder.fit_transform(df[cat_cols])
@@ -222,4 +222,4 @@ with open(rules_path, "w", encoding="utf-8") as f:
 print("\nArchivos de importancia y reglas:")
 print("  •", imp_path)
 print("  •", rules_path)
-print("\n✅ Entrenamiento y exportación completados.")
+print("\nEntrenamiento y exportación completados.")

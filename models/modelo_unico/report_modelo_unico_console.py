@@ -1,406 +1,335 @@
 # models/modelo_unico/report_modelo_unico_console.py
 import os
-import numpy as np
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 plt.style.use("ggplot")
-sns.set()
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Rutas a los CSV por KPI
 KPI1_PATH = os.path.join(THIS_DIR, "resultados_kpi1_margen_plato.csv")
 KPI2_PATH = os.path.join(THIS_DIR, "resultados_kpi2_ticket_diario.csv")
 KPI3_PATH = os.path.join(THIS_DIR, "resultados_kpi3_rotacion.csv")
+PRED_ALL_PATH = os.path.join(THIS_DIR, "predicciones_modelo_unico.csv")
 
+# ===========================================================
+# Carga de datos con validaciones básicas
+# ===========================================================
+def safe_read_csv(path, label):
+    if not os.path.exists(path):
+        print(f"[AVISO] No se encontró {label}: {path}")
+        return None
+    df = pd.read_csv(path)
+    print(f"Filas en {label}: {len(df)}")
+    print(f"Columnas: {list(df.columns)}\n")
+    return df
 
-# =====================================================================
-# Helper para elegir columnas aunque el nombre cambie un poco
-# =====================================================================
-def pick_col(df: pd.DataFrame, candidates, kpi_name, logical_name):
-    """
-    Devuelve la primera columna encontrada en 'candidates'.
-    Lanza error legible si ninguna existe.
-    """
-    for c in candidates:
-        if c in df.columns:
-            return c
-    raise SystemExit(
-        f"[{kpi_name}] No se encontró ninguna columna {candidates} "
-        f"para '{logical_name}'. Revisa el CSV o ajusta la lista de candidatos."
-    )
+df_kpi1 = safe_read_csv(KPI1_PATH, "resultados_kpi1_margen_plato.csv")
+df_kpi2 = safe_read_csv(KPI2_PATH, "resultados_kpi2_ticket_diario.csv")
+df_kpi3 = safe_read_csv(KPI3_PATH, "resultados_kpi3_rotacion.csv")
 
+print("\n" + "=" * 80)
+print("REPORTE INTEGRADO – MODELO ÚNICO (Árbol de Decisión Multi-Output)")
+print("=" * 80)
 
-# =====================================================================
-# 1) KPI-1: MARGEN DE GANANCIA POR PLATO
-# =====================================================================
-def reporte_kpi1():
-    if not os.path.exists(KPI1_PATH):
-        print(f"\n❌ No se encontró {KPI1_PATH}. Ejecuta primero train_arbol_multioutput.py")
-        return
-
-    df = pd.read_csv(KPI1_PATH)
-
+# ======================================================================================
+# KPI 1: MARGEN DE GANANCIA POR PLATO
+# ======================================================================================
+if df_kpi1 is not None:
     print("\n" + "=" * 80)
     print("KPI-1: MARGEN DE GANANCIA POR PLATO")
     print("=" * 80)
-    print(f"Filas en resultados_kpi1_margen_plato: {len(df)}")
-    print("Columnas:", list(df.columns))
 
-    # -------- Mapeo flexible de columnas --------
-    col_fecha = pick_col(
-        df,
-        ["fecha"],
-        "KPI1",
-        "fecha",
-    )
-    col_modalidad = pick_col(
-        df,
-        ["modalidad"],
-        "KPI1",
-        "modalidad",
-    )
-    col_plato = pick_col(
-        df,
-        ["nombre_plato", "plato", "item"],
-        "KPI1",
-        "nombre del plato",
-    )
-    col_margen_real = pick_col(
-        df,
-        ["margen_plato_real", "margen_real", "margen_total_dia"],
-        "KPI1",
-        "margen real",
-    )
-    col_margen_pred = pick_col(
-        df,
-        ["margen_plato_pred", "margen_pred", "margen_predicho"],
-        "KPI1",
-        "margen predicho",
-    )
-    col_precio = pick_col(
-        df,
-        ["precio_plato", "precio_unitario", "precio"],
-        "KPI1",
-        "precio del plato",
-    )
-    col_costo = pick_col(
-        df,
-        ["costo_plato", "costo_unitario", "costo"],
-        "KPI1",
-        "costo del plato",
-    )
+    # Esperamos columnas: margen_plato_real, margen_plato_pred
+    if not {"margen_plato_real", "margen_plato_pred"}.issubset(df_kpi1.columns):
+        print("[KPI1] No se encontraron columnas 'margen_plato_real' y 'margen_plato_pred'.")
+    else:
+        # Residual por línea
+        df_kpi1["res_margen_plato"] = df_kpi1["margen_plato_real"] - df_kpi1["margen_plato_pred"]
 
-    # Aseguramos numéricos
-    for c in [col_margen_real, col_margen_pred, col_precio, col_costo]:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
+        # --- Resumen estadístico global ---
+        stats_margen = df_kpi1[["margen_plato_real", "margen_plato_pred", "res_margen_plato"]].describe()
+        print("\nResumen estadístico global del margen por plato (real vs predicho):")
+        print(stats_margen)
 
-    # Residual
-    df["res_margen"] = df[col_margen_real] - df[col_margen_pred]
+        # --- Top 10 líneas con margen real > esperado ---
+        cols_linea = ["fecha", "modalidad", "nombre_plato",
+                      "margen_plato_real", "margen_plato_pred", "res_margen_plato"]
+        cols_linea = [c for c in cols_linea if c in df_kpi1.columns]
 
-    # -------- Resumen estadístico global --------
-    stats = df[[col_margen_real, col_margen_pred, "res_margen"]].describe()
-    print("\nResumen estadístico margen por plato (real vs predicho):")
-    print(stats)
+        top_plus = df_kpi1.sort_values("res_margen_plato", ascending=False).head(10)[cols_linea]
+        print("\nLíneas donde el margen REAL es mayor al esperado (TOP 10):")
+        print(top_plus.to_string(index=False))
 
-    # -------- Top 10 platos con mayor margen real promedio --------
-    agg_plato = (
-        df.groupby(col_plato)[[col_margen_real, col_margen_pred, "res_margen"]]
-        .mean()
-        .sort_values(col_margen_real, ascending=False)
-        .head(10)
-        .round(2)
-        .reset_index()
-    )
+        # --- Top 10 líneas con margen real < esperado ---
+        top_minus = df_kpi1.sort_values("res_margen_plato").head(10)[cols_linea]
+        print("\nLíneas donde el margen REAL es menor al esperado (TOP 10):")
+        print(top_minus.to_string(index=False))
 
-    print("\nTOP 10 platos más rentables (promedio de margen real):")
-    print(agg_plato.to_string(index=False))
+        # --- Promedio de margen por plato ---
+        if "nombre_plato" in df_kpi1.columns:
+            margen_plato_agg = (
+                df_kpi1
+                .groupby("nombre_plato")[["margen_plato_real", "margen_plato_pred"]]
+                .mean()
+                .sort_values("margen_plato_real", ascending=False)
+                .round(2)
+                .head(15)
+            )
+            print("\nTop 15 platos con mayor margen promedio REAL:")
+            print(margen_plato_agg.to_string())
 
-    # -------- Platos con peor desempeño (margen real promedio bajo) --------
-    worst_plato = (
-        df.groupby(col_plato)[[col_margen_real, col_margen_pred, "res_margen"]]
-        .mean()
-        .sort_values(col_margen_real, ascending=True)
-        .head(10)
-        .round(2)
-        .reset_index()
-    )
+        # ---------- Gráfico: real vs predicho (margen por plato) ----------
+        plt.figure(figsize=(7, 5))
+        sns.scatterplot(
+            x=df_kpi1["margen_plato_real"],
+            y=df_kpi1["margen_plato_pred"]
+        )
+        mmin = df_kpi1["margen_plato_real"].min()
+        mmax = df_kpi1["margen_plato_real"].max()
+        plt.plot([mmin, mmax], [mmin, mmax], linestyle="--")
+        plt.title("Margen por plato: real vs predicho")
+        plt.xlabel("Margen real por plato (S/)")
+        plt.ylabel("Margen predicho por plato (S/)")
+        plt.tight_layout()
+        plt.show()
 
-    print("\nTOP 10 platos con menor margen real promedio:")
-    print(worst_plato.to_string(index=False))
+        # ---------- Histograma margen real ----------
+        plt.figure(figsize=(7, 5))
+        sns.histplot(df_kpi1["margen_plato_real"], kde=True)
+        plt.title("Distribución del margen de ganancia por plato (real)")
+        plt.xlabel("Margen por plato (S/)")
+        plt.tight_layout()
+        plt.show()
 
-    # -------- Scatter real vs predicho --------
-    plt.figure(figsize=(7, 5))
-    sns.scatterplot(x=df[col_margen_real], y=df[col_margen_pred], alpha=0.6)
-    mmin = np.nanmin(df[col_margen_real])
-    mmax = np.nanmax(df[col_margen_real])
-    plt.plot([mmin, mmax], [mmin, mmax], "r--")
-    plt.title("Margen real vs margen predicho (por plato)")
-    plt.xlabel("Margen real (S/)")
-    plt.ylabel("Margen predicho (S/)")
-    plt.tight_layout()
-    plt.show()
+        # ---------- Barras: top 10 platos por margen promedio ----------
+        if "nombre_plato" in df_kpi1.columns:
+            top_plot = margen_plato_agg.head(10).reset_index()
+            plt.figure(figsize=(8, 4))
+            sns.barplot(data=top_plot, x="nombre_plato", y="margen_plato_real")
+            plt.xticks(rotation=45, ha="right")
+            plt.title("Top 10 platos por margen promedio REAL")
+            plt.xlabel("Plato")
+            plt.ylabel("Margen promedio (S/)")
+            plt.tight_layout()
+            plt.show()
 
-    # -------- Histograma de margen real --------
-    plt.figure(figsize=(7, 4))
-    sns.histplot(df[col_margen_real], kde=True)
-    plt.title("Distribución del margen real por plato")
-    plt.xlabel("Margen real (S/)")
-    plt.tight_layout()
-    plt.show()
-
-    # -------- Barras: top platos por margen real promedio --------
-    plt.figure(figsize=(9, 5))
-    sns.barplot(
-        data=agg_plato,
-        x=col_margen_real,
-        y=col_plato,
-    )
-    plt.title("Top 10 platos más rentables (margen real promedio)")
-    plt.xlabel("Margen real promedio (S/)")
-    plt.ylabel("Plato")
-    plt.tight_layout()
-    plt.show()
-
-    # -------- Comentario automático --------
-    print(
-        "\nComentario automático KPI1:\n"
-        "   • La tabla de TOP 10 muestra los platos que más margen aportan al negocio.\n"
-        "   • La comparación real vs predicho permite ver si el modelo está\n"
-        "     sobreestimando o subestimando la rentabilidad de algunos platos.\n"
-        "   • Estos resultados son útiles para ajustar precios, porciones o promociones.\n"
-    )
-
-
-# =====================================================================
-# 2) KPI-2: TICKET PROMEDIO DIARIO
-# =====================================================================
-def reporte_kpi2():
-    if not os.path.exists(KPI2_PATH):
-        print(f"\n❌ No se encontró {KPI2_PATH}. Ejecuta primero train_arbol_multioutput.py")
-        return
-
-    df = pd.read_csv(KPI2_PATH)
-
+# ======================================================================================
+# KPI 2: TICKET PROMEDIO DIARIO
+# ======================================================================================
+if df_kpi2 is not None:
     print("\n" + "=" * 80)
     print("KPI-2: TICKET PROMEDIO DIARIO")
     print("=" * 80)
-    print(f"Filas en resultados_kpi2_ticket_diario: {len(df)}")
-    print("Columnas:", list(df.columns))
 
-    col_fecha = pick_col(df, ["fecha"], "KPI2", "fecha")
-    col_modalidad = pick_col(df, ["modalidad"], "KPI2", "modalidad")
+    # Buscamos columnas reales y predichas
+    real_candidates = ["ticket_dia_real", "ticket_real", "ticket_promedio_dia"]
+    pred_candidates = ["ticket_dia_pred", "ticket_pred", "ticket_predicho"]
 
-    # Ajusta estas listas si en tu CSV se llaman distinto
-    col_ticket_real = pick_col(
-        df,
-        ["ticket_real", "ticket_promedio_dia", "ticket"],
-        "KPI2",
-        "ticket promedio real",
-    )
-    col_ticket_pred = pick_col(
-        df,
-        ["ticket_pred", "ticket_predicho"],
-        "KPI2",
-        "ticket promedio predicho",
-    )
-    col_num_clientes = pick_col(
-        df,
-        ["num_clientes", "clientes_dia"],
-        "KPI2",
-        "número de clientes",
-    )
-    col_ventas = pick_col(
-        df,
-        ["ventas_totales_dia", "ventas_totales", "total_ventas"],
-        "KPI2",
-        "ventas totales del día",
-    )
+    col_ticket_real = next((c for c in real_candidates if c in df_kpi2.columns), None)
+    col_ticket_pred = next((c for c in pred_candidates if c in df_kpi2.columns), None)
 
-    for c in [col_ticket_real, col_ticket_pred, col_num_clientes, col_ventas]:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
+    print(f"Columnas detectadas para KPI2 -> real: {col_ticket_real}, pred: {col_ticket_pred}")
 
-    df["res_ticket"] = df[col_ticket_real] - df[col_ticket_pred]
+    if col_ticket_real is None or col_ticket_pred is None:
+        print("[KPI2] No se encontraron columnas adecuadas para ticket promedio real/predicho.")
+    else:
+        df_kpi2["res_ticket"] = df_kpi2[col_ticket_real] - df_kpi2[col_ticket_pred]
 
-    # Resumen estadístico
-    stats = df[[col_ticket_real, col_ticket_pred, "res_ticket"]].describe()
-    print("\nResumen estadístico del ticket promedio diario:")
-    print(stats)
+        # --- Resumen estadístico ---
+        stats_ticket = df_kpi2[[col_ticket_real, col_ticket_pred, "res_ticket"]].describe()
+        print("\nResumen estadístico del ticket promedio diario (real vs predicho):")
+        print(stats_ticket)
 
-    # Días con ticket mucho más bajo de lo esperado
-    dias_bajos = (
-        df.sort_values("res_ticket")
-        .head(10)[[col_fecha, col_modalidad, col_ticket_real, col_ticket_pred, "res_ticket"]]
-        .round(2)
-    )
-    print("\nTOP 10 días con ticket por debajo de lo esperado:")
-    print(dias_bajos.to_string(index=False))
+        cols_ticket = ["fecha", "modalidad", col_ticket_real, col_ticket_pred, "res_ticket"]
+        cols_ticket = [c for c in cols_ticket if c in df_kpi2.columns]
 
-    # Días con ticket muy por encima de lo esperado
-    dias_altos = (
-        df.sort_values("res_ticket", ascending=False)
-        .head(10)[[col_fecha, col_modalidad, col_ticket_real, col_ticket_pred, "res_ticket"]]
-        .round(2)
-    )
-    print("\nTOP 10 días con ticket por encima de lo esperado:")
-    print(dias_altos.to_string(index=False))
+        # Días con ticket por debajo de lo esperado
+        dias_bajos = (
+            df_kpi2[df_kpi2["res_ticket"] < 0]
+            .sort_values("res_ticket")
+            .head(10)[cols_ticket]
+        )
+        print("\nDías con TICKET REAL por debajo del esperado (TOP 10):")
+        print(dias_bajos.to_string(index=False))
 
-    # Scatter real vs predicho
-    plt.figure(figsize=(7, 5))
-    sns.scatterplot(x=df[col_ticket_real], y=df[col_ticket_pred], alpha=0.6)
-    tmin = np.nanmin(df[col_ticket_real])
-    tmax = np.nanmax(df[col_ticket_real])
-    plt.plot([tmin, tmax], [tmin, tmax], "r--")
-    plt.title("Ticket promedio real vs predicho (por día)")
-    plt.xlabel("Ticket real (S/)")
-    plt.ylabel("Ticket predicho (S/)")
-    plt.tight_layout()
-    plt.show()
+        # Días con ticket por encima de lo esperado
+        dias_altos = (
+            df_kpi2[df_kpi2["res_ticket"] > 0]
+            .sort_values("res_ticket", ascending=False)
+            .head(10)[cols_ticket]
+        )
+        print("\nDías con TICKET REAL por encima del esperado (TOP 10):")
+        print(dias_altos.to_string(index=False))
 
-    # Histograma ticket real
-    plt.figure(figsize=(7, 4))
-    sns.histplot(df[col_ticket_real], kde=True)
-    plt.title("Distribución del ticket promedio diario (real)")
-    plt.xlabel("Ticket (S/)")
-    plt.tight_layout()
-    plt.show()
+        # ---------- Gráfico: real vs predicho ----------
+        plt.figure(figsize=(7, 5))
+        sns.scatterplot(
+            x=df_kpi2[col_ticket_real],
+            y=df_kpi2[col_ticket_pred]
+        )
+        tmin = df_kpi2[col_ticket_real].min()
+        tmax = df_kpi2[col_ticket_real].max()
+        plt.plot([tmin, tmax], [tmin, tmax], linestyle="--")
+        plt.title("Ticket promedio diario: real vs predicho")
+        plt.xlabel("Ticket real (S/)")
+        plt.ylabel("Ticket predicho (S/)")
+        plt.tight_layout()
+        plt.show()
 
-    # Correlación simple con número de clientes y ventas totales
-    corr = df[[col_ticket_real, col_num_clientes, col_ventas]].corr().round(3)
-    print("\nMatriz de correlación (ticket vs clientes y ventas):")
-    print(corr)
+        # ---------- Histograma ticket real ----------
+        plt.figure(figsize=(7, 5))
+        sns.histplot(df_kpi2[col_ticket_real], kde=True)
+        plt.title("Distribución del ticket promedio diario (real)")
+        plt.xlabel("Ticket promedio (S/)")
+        plt.tight_layout()
+        plt.show()
 
-    plt.figure(figsize=(6, 4))
-    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f")
-    plt.title("Correlación: ticket promedio vs clientes y ventas")
-    plt.tight_layout()
-    plt.show()
-
-    print(
-        "\nComentario automático KPI2:\n"
-        "   • Los días con ticket bajo son candidatos para aplicar promociones,\n"
-        "     combos o actividades de marketing.\n"
-        "   • Los días con ticket alto muestran momentos fuertes del negocio,\n"
-        "     donde conviene asegurar stock y personal.\n"
-        "   • La correlación con número de clientes y ventas totales ayuda a\n"
-        "     entender si el ticket sube por volumen o por valor de consumo.\n"
-    )
-
-
-# =====================================================================
-# 3) KPI-3: ROTACIÓN (PLATO TOP POR MES)
-# =====================================================================
-def reporte_kpi3():
-    if not os.path.exists(KPI3_PATH):
-        print(f"\n❌ No se encontró {KPI3_PATH}. Ejecuta primero train_arbol_multioutput.py")
-        return
-
-    df = pd.read_csv(KPI3_PATH)
-
+# ======================================================================================
+# KPI 3: ROTACIÓN DE INVENTARIO (PLATOS TOP)
+# ======================================================================================
+if df_kpi3 is not None:
     print("\n" + "=" * 80)
-    print("KPI-3: ROTACIÓN – PLATOS MÁS VENDIDOS POR MES")
-    print("=" * 80)
-    print(f"Filas en resultados_kpi3_rotacion: {len(df)}")
-    print("Columnas:", list(df.columns))
-
-    col_mes = pick_col(df, ["mes"], "KPI3", "mes")
-    col_plato_top = pick_col(df, ["plato_top_mes", "plato_top", "plato"], "KPI3", "plato top")
-    col_cant = pick_col(df, ["cant_top_mes", "cantidad_vendida_mes", "cantidad"], "KPI3", "cantidad vendida mes")
-    col_rot_pred = pick_col(df, ["rotacion_pred", "rotacion_code", "rotacion_clase"], "KPI3", "clase de rotación")
-
-    df[col_cant] = pd.to_numeric(df[col_cant], errors="coerce")
-
-    # Resumen por clase de rotación
-    dist_rot = (
-        df.groupby(col_rot_pred)[col_mes]
-        .count()
-        .reset_index(name="num_registros")
-        .sort_values("num_registros", ascending=False)
-    )
-
-    print("\nDistribución de registros por clase de rotación predicha:")
-    print(dist_rot.to_string(index=False))
-
-    # TOP platos más vendidos (suma en todo el periodo)
-    top_platos = (
-        df.groupby(col_plato_top)[col_cant]
-        .sum()
-        .sort_values(ascending=False)
-        .head(10)
-        .reset_index()
-    )
-
-    print("\nTOP 10 platos más vendidos en todo el periodo (suma de unidades):")
-    print(top_platos.to_string(index=False))
-
-    # TOP meses con más rotación (suma de unidades del plato top)
-    top_meses = (
-        df.groupby(col_mes)[col_cant]
-        .sum()
-        .sort_values(ascending=False)
-        .head(12)
-        .reset_index()
-    )
-
-    print("\nTOP 12 meses con mayor volumen de venta del plato top:")
-    print(top_meses.to_string(index=False))
-
-    # Barras: clases de rotación
-    plt.figure(figsize=(6, 4))
-    sns.countplot(data=df, x=col_rot_pred)
-    plt.title("Distribución de clases de rotación predicha")
-    plt.xlabel("Clase de rotación (0=baja,1=media,2=alta)")
-    plt.ylabel("Cantidad de registros")
-    plt.tight_layout()
-    plt.show()
-
-    # Barras: top platos
-    plt.figure(figsize=(9, 5))
-    sns.barplot(data=top_platos, x=col_cant, y=col_plato_top)
-    plt.title("Top 10 platos más vendidos (rotación)")
-    plt.xlabel("Unidades vendidas (suma en todo el periodo)")
-    plt.ylabel("Plato")
-    plt.tight_layout()
-    plt.show()
-
-    # Línea: evolución mensual de la cantidad del plato top
-    plt.figure(figsize=(9, 4))
-    # Orden cronológico por mes
-    df_mes = top_meses.copy()
-    # Para ordenar correctamente por fecha si el formato es YYYY-MM
-    df_mes["mes_orden"] = pd.to_datetime(df_mes[col_mes] + "-01", errors="coerce")
-    df_mes = df_mes.sort_values("mes_orden")
-    plt.plot(df_mes[col_mes], df_mes[col_cant], marker="o")
-    plt.title("Evolución de la rotación (plato top por mes)")
-    plt.xlabel("Mes")
-    plt.ylabel("Unidades vendidas del plato top")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.show()
-
-    print(
-        "\nComentario automático KPI3:\n"
-        "   • La clase de rotación predicha (0,1,2) indica qué tan rápido se\n"
-        "     mueven los platos top en cada mes.\n"
-        "   • Los platos con mayores unidades vendidas son candidatos para\n"
-        "     asegurar stock y negociar mejores condiciones con proveedores.\n"
-        "   • La curva de evolución mensual permite ver estacionalidad y\n"
-        "     planificar compras e inventario con anticipación.\n"
-    )
-
-
-# =====================================================================
-# MAIN
-# =====================================================================
-if __name__ == "__main__":
-    print("\n" + "=" * 80)
-    print("REPORTE CONSOLIDADO – MODELO ÚNICO (3 KPI, CSVs separados)")
+    print("KPI-3: ROTACIÓN DE INVENTARIO (PLATOS TOP POR MES)")
     print("=" * 80)
 
-    # Cada función usa SU CSV correspondiente
-    reporte_kpi1()
-    reporte_kpi2()
-    reporte_kpi3()
+    # Esperamos columnas: mes, plato_top_mes, cant_top_mes, rotacion_real, rotacion_pred
+    needed = {"mes", "plato_top_mes", "cant_top_mes", "rotacion_real", "rotacion_pred"}
+    if not needed.issubset(df_kpi3.columns):
+        print(f"[KPI3] Faltan columnas en resultados_kpi3_rotacion.csv. Se esperaba: {needed}")
+    else:
+        # Mapeo 0/1/2 -> etiquetas
+        label_map = {0: "baja", 1: "media", 2: "alta"}
 
-    print("\nFIN DEL REPORTE CONSOLIDADO.\n")
+        df_kpi3["rot_real_label"] = df_kpi3["rotacion_real"].map(label_map)
+        df_kpi3["rot_pred_label"] = df_kpi3["rotacion_pred"].map(label_map)
+        df_kpi3["acierto_rot"] = (df_kpi3["rotacion_real"] == df_kpi3["rotacion_pred"]).astype(int)
+
+        # Distribución de clases reales
+        dist_real = df_kpi3["rot_real_label"].value_counts().reindex(["alta", "media", "baja"]).fillna(0).astype(int)
+        print("\nDistribución de clases de rotación (REAL):")
+        print(dist_real)
+
+        # Distribución de clases predichas
+        dist_pred = df_kpi3["rot_pred_label"].value_counts().reindex(["alta", "media", "baja"]).fillna(0).astype(int)
+        print("\nDistribución de clases de rotación (PREDICHA):")
+        print(dist_pred)
+
+        # Exactitud del modelo
+        acc_rot = df_kpi3["acierto_rot"].mean()
+        print(f"\nExactitud del modelo de rotación (platos top por mes): {acc_rot*100:.2f}%")
+
+        # Top platos por cantidad vendida en el mes
+        top_rot = (
+            df_kpi3.sort_values("cant_top_mes", ascending=False)
+            .head(15)[["mes", "plato_top_mes", "cant_top_mes", "rot_real_label", "rot_pred_label"]]
+        )
+        print("\nTop 15 platos más vendidos por mes (con clase de rotación):")
+        print(top_rot.to_string(index=False))
+
+        # ---------- Barras: distribución REAL ----------
+        plt.figure(figsize=(6, 4))
+        sns.barplot(
+            x=dist_real.index,
+            y=dist_real.values
+        )
+        plt.title("Distribución real de clases de rotación (platos top)")
+        plt.xlabel("Clase de rotación")
+        plt.ylabel("Cantidad de registros")
+        plt.tight_layout()
+        plt.show()
+
+        # ---------- Barras: distribución PREDICHA ----------
+        plt.figure(figsize=(6, 4))
+        sns.barplot(
+            x=dist_pred.index,
+            y=dist_pred.values
+        )
+        plt.title("Distribución predicha de clases de rotación (platos top)")
+        plt.xlabel("Clase de rotación (predicha)")
+        plt.ylabel("Cantidad de registros")
+        plt.tight_layout()
+        plt.show()
+
+# ======================================================================================
+# CORRELACIONES GLOBALES (usando predicciones_modelo_unico.csv si existe)
+# ======================================================================================
+if os.path.exists(PRED_ALL_PATH):
+    print("\n" + "=" * 80)
+    print("CORRELACIONES ENTRE KPIs Y VARIABLES OPERATIVAS")
+    print("=" * 80)
+
+    df_all = pd.read_csv(PRED_ALL_PATH)
+    print(f"Filas en predicciones_modelo_unico.csv: {len(df_all)}")
+
+    # Seleccionamos sólo las columnas numéricas relevantes que existan
+    posibles = [
+        "margen_plato_real",
+        "ticket_dia_real",
+        "cant_top_mes",
+        "num_clientes",
+        "ventas_totales_dia",
+        "total_ticket",
+        "margen_total_dia",
+    ]
+    corr_cols = [c for c in posibles if c in df_all.columns]
+
+    if len(corr_cols) >= 2:
+        corr = df_all[corr_cols].corr()
+        print("\nMatriz de correlación (KPIs vs variables operativas):")
+        print(corr.round(3))
+
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm")
+        plt.title("Matriz de correlación – KPIs y variables operativas")
+        plt.tight_layout()
+        plt.show()
+    else:
+        print("[CORR] No hay suficientes columnas numéricas para calcular correlaciones.")
+else:
+    print("\n[AVISO] No se encontró predicciones_modelo_unico.csv. Se omite sección de correlaciones.")
+
+# ======================================================================================
+# INTERPRETACIÓN AUTOMÁTICA (texto para exposición)
+# ======================================================================================
+print("\n" + "=" * 80)
+print("INTERPRETACIÓN AUTOMATIZADA PARA EXPOSICIÓN")
+print("=" * 80)
+
+print(
+"""
+1️:Margen de ganancia por plato (KPI 1)
+   • Se analiza el margen de cada línea de venta (plato en un ticket), comparando el margen
+     REAL con el margen PREDICHO por el árbol de decisión.
+   • Los TOP 10 casos positivos muestran platos/fechas donde se está ganando más de lo esperado;
+     esto ayuda a identificar platos estrella o buenas combinaciones de precio y costo.
+   • Los casos negativos muestran oportunidades de mejora: revisar recetas, porciones o precios.
+
+2️:Ticket promedio diario (KPI 2)
+   • El modelo estima el ticket promedio por día y modalidad (local / pensión).
+   • Al comparar el ticket REAL con el ticket PREDICHO se identifican días “débiles” donde
+     conviene lanzar promociones, combos o campañas, y días “fuertes” donde se debe asegurar
+     suficiente stock y personal.
+   • La distribución del ticket permite ver si el restaurante trabaja en un rango estable o muy
+     variable de gasto por cliente.
+
+3️:Rotación de platos top (KPI 3)
+   • Para cada mes se toma el plato más vendido y se le asigna una clase de rotación
+     (baja, media, alta) según la cantidad vendida.
+   • El modelo aprende a clasificar esa rotación y se mide la exactitud entre la clase REAL y
+     la PREDICHA. Esto es útil para anticipar qué platos serán “rápidos” y cuáles se moverán poco.
+   • Con esta información se pueden ajustar compras, almacenamiento y planificación de menús.
+
+-> En conjunto, el modelo unificado de árbol de decisión permite conectar:
+   • La rentabilidad por plato (KPI1),
+   • El comportamiento de consumo diario (KPI2),
+   • Y la rotación de los platos clave a nivel mensual (KPI3),
+   ofreciendo una base sólida para construir un dashboard web de apoyo a decisiones
+   comerciales, operativas y de abastecimiento en el restaurante.
+"""
+)
+
+print("\nFIN DEL REPORTE\n")
